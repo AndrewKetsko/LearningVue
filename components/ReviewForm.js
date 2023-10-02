@@ -1,4 +1,27 @@
 app.component("review-form", {
+  data() {
+    return {
+      name: "",
+      review: "",
+      rating: null,
+      rec: false,
+    };
+  },
+  methods: {
+    onSubmit() {
+      let productReview = {
+        name: this.name,
+        review: this.review,
+        rating: this.rating,
+        rec: this.rec,
+      };
+      this.$emit("review-submitted", productReview);
+      this.name = "";
+      this.review = "";
+      this.rating = null;
+      this.rec = false;
+    },
+  },
   template:
     /*html*/
     `<form class="review-form" @submit.prevent='onSubmit'>
@@ -26,28 +49,4 @@ app.component("review-form", {
   <input class="button" type="submit" value="Submit" />
 
 </form>`,
-
-  data() {
-    return {
-      name: "",
-      review: "",
-      rating: null,
-      rec: false,
-    };
-  },
-  methods: {
-    onSubmit() {
-      let productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
-        rec: this.rec,
-      };
-      this.$emit("review-submitted", productReview);
-      this.name = "";
-      this.review = "";
-      this.rating = null;
-      this.rec = false;
-    },
-  },
 });
